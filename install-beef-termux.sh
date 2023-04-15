@@ -17,9 +17,10 @@ fi
 # Clone beef-xss repository
 cd $HOME/opt
 git clone https://github.com/beefproject/beef
+pkg install ruby
 cd $HOME/opt/beef
-echo "gem 'net-smtp', require: false" >> Gemfile
-bash install
+echo "gem 'net-smtp', require: false" >> Gemfilep
+bundle install
 
 # Create "bin" directory if it doesn't exist
 folder_name="bin"
