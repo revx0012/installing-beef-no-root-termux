@@ -33,7 +33,7 @@ if [ ! -d "$target_dir" ]; then
 fi
 
 # Create "beef" command in the "bin" directory
-echo "cd $HOME/opt/beef && ruby beef" > $HOME/bin/beef
+echo "cd /data/data/com.termux/files/home/opt/beef && ruby beef" > /data/data/com.termux/files/home/bin/beef
 chmod +x $HOME/bin/beef
 
 echo "${G}[*] Installation completed..."
