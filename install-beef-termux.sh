@@ -25,16 +25,5 @@ gem install nio4r
 gem update
 
 
-# Create "bin" directory if it doesn't exist
-folder_name="bin"
-target_dir="$HOME/$folder_name"
-if [ ! -d "$target_dir" ]; then
-    mkdir "$target_dir"
-fi
-
-# Create "beef" command in the "bin" directory
-echo "cd /data/data/com.termux/files/home/opt/beef && ruby beef" > /data/data/com.termux/files/home/bin/beef
-chmod +x $HOME/bin/beef
-
 echo "${G}[*] Installation completed..."
-echo "[*] Now you can launch beef just by executing 'beef' and make sure to change your username and password in '$HOME/opt/beef/config.yaml' file${W}"
+echo "[*] Now you can launch beef just by executing 'ruby ~/opt/beef/beef' and make sure to change your username and password in '$HOME/opt/beef/config.yaml' file${W}"
