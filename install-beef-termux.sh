@@ -21,6 +21,9 @@ pkg install ruby
 cd $HOME/opt/beef
 echo "gem 'net-smtp', require: false" >> Gemfilep
 bundle install
+gem install nio4r
+gem update
+
 
 # Create "bin" directory if it doesn't exist
 folder_name="bin"
