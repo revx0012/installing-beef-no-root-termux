@@ -3,7 +3,6 @@ pkg update -y && pkg upgrade -y
 pkg install curl git libyaml libxslt bison espeak ruby python nodejs nano binutils -y
 git clone https://github.com/beefproject/beef
 cd beef
-echo "gem 'net-smtp', require: false" >> Gemfile
 sed -i '280d' install
 sed -i 's/sudo//' install
 rm Gemfile.lock
