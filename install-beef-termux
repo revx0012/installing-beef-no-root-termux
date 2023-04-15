@@ -8,4 +8,4 @@ sed -i 's/sudo//' install
 rm Gemfile.lock
 bundle install
 echo "installation has been done!"
-echo "if you wanna start it, type bash $HOME/beef/beef"
+echo "if you wanna start it, type ./beef on the beef folder it's on $HOME"
