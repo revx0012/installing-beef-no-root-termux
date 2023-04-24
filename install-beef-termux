@@ -1,10 +1,19 @@
+#!/bin/bash
 pkg update -y && pkg upgrade -y
 pkg install curl git libyaml libxslt bison espeak ruby python nodejs nano binutils -y
 git clone https://github.com/beefproject/beef
 cd beef
-sed -i '280d' install
-sed -i 's/sudo//' install
 rm Gemfile.lock
 bundle install
+
+
+if [ ! -d "$PREFIX/opt" ]; then
+  mkdir "$PREFIX/opt"
+fi
+
+mv $HOME/beef $PREFIX/opt
+echo "cd $PREFIX/opt/beef && ./beef" > $PATH/beef
+chmod +x $PATH/beef
+
 echo "installation has been done!"
-echo "if you wanna start it, type ./beef on the beef folder it's on $HOME"
+echo "if you wanna start it, type beef"
