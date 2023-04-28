@@ -17,3 +17,4 @@ chmod +x $PATH/beef
 
 echo "installation has been done!"
 echo "if you wanna start it, type beef"
+echo "just in case if you want to change the password and username, you can type 'cd $PREFIX/opt/beef' then you can make changes around there"
