@@ -1,3 +1,4 @@
+cd
 echo "Installing..."
 pkg update -y && pkg upgrade -y
 pkg install curl git libyaml libxslt bison espeak ruby python nodejs nano binutils -y
@@ -5,6 +6,7 @@ git clone https://github.com/beefproject/beef
 cd beef
 rm Gemfile.lock
 bundle install
+cd
 
 mkdir -p "$PREFIX/opt"
 
