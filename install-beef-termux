@@ -1,19 +1,58 @@
-cd
-echo "Installing..."
-pkg update -y && pkg upgrade -y
-pkg install curl git libyaml libxslt bison espeak ruby python nodejs nano binutils -y
-git clone https://github.com/beefproject/beef
-cd beef
-rm Gemfile.lock
+#!/bin/bash
+
+# Function to print colored text
+print_color() {
+    case "$1" in
+        "green") echo -e "\e[32m$2\e[0m" ;;
+        "red") echo -e "\e[31m$2\e[0m" ;;
+        "yellow") echo -e "\e[33m$2\e[0m" ;;
+        "blue") echo -e "\e[34m$2\e[0m" ;;
+        *) echo "$2" ;;
+    esac
+}
+
+# Exit on error
+set -e
+
+# Move to home directory
+cd || { print_color "red" "Failed to change directory to home"; exit 1; }
+
+print_color "blue" "Updating and upgrading packages..."
+apt update -y && apt upgrade -y
+
+print_color "blue" "Installing dependencies..."
+apt install curl git libyaml libxslt bison espeak ruby python nodejs nano binutils -y
+
+# Check if beef directory exists
+if [ -d "beef" ]; then
+    print_color "yellow" "Beef directory already exists. Skipping cloning."
+else
+    print_color "blue" "Cloning beef project..."
+    git clone https://github.com/beefproject/beef
+fi
+
+cd beef || { print_color "red" "Failed to change directory to beef"; exit 1; }
+
+# Remove Gemfile.lock if it exists
+if [ -f "Gemfile.lock" ]; then
+    rm Gemfile.lock
+fi
+
+print_color "blue" "Installing gems..."
 bundle install
-cd
 
-mkdir -p "$PREFIX/opt"
+cd || { print_color "red" "Failed to change directory to home"; exit 1; }
 
-mv ./beef $PREFIX/opt
-echo "cd $PREFIX/opt/beef && ./beef" > $PREFIX/bin/beef
-chmod +x $PREFIX/bin/beef
+# Move beef to opt directory
+if [ ! -d "$PREFIX/opt" ]; then
+    mkdir -p "$PREFIX/opt"
+fi
+mv ./beef "$PREFIX/opt"
 
-echo "installation has been done!"
-echo "if you wanna start it, type beef"
-echo "just in case if you want to change the password and username, you can type 'cd $PREFIX/opt/beef' then you can make changes around there"
+# Create beef executable
+echo "cd $PREFIX/opt/beef && ./beef" > "$PREFIX/bin/beef"
+chmod +x "$PREFIX/bin/beef"
+
+print_color "green" "Installation has been done!"
+print_color "green" "To start it, type 'beef'"
+print_color "yellow" "To change the password and username, go to '$PREFIX/opt/beef' and modify the config file."
